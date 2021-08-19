@@ -2,33 +2,35 @@ import React from "react";
 import {Text, View, StyleSheet} from "react-native";
 
 
-export const Form = () => {
+export const Info = () => {
     return (
         <View>
             <Text style={styles.header}>Вход</Text>
-            <Text style={styles.info}>Согласно классификации М. Вебера, форма
-                политического сознания предсказуема.
-            Политическая психология, согласно традиционным
-                представляениям, символизирует
+            <Text style={styles.info}>
+                Согласно классификации М. Вебера, форма{'\n'}
+                политического сознания предсказуема.{'\n'}
+            Политическая психология, согласно традиционным{'\n'}
+                представляениям, символизирует{'\n'}
                 системный культ личности
             </Text>
-            
+
         </View>
     )
 }
 
 const styles = StyleSheet.create({
     header: {
-        marginTop: 65,
+        marginTop: 70,
+        marginBottom: 30,
         textAlign: 'center',
-        color: 'red',
+        color: '#d9111a',
         fontSize: 50,
-        fontWeight: 'bold',
-        marginBottom: 40
+        fontWeight: 'bold'
     },
     info: {
         textAlign: 'center',
         color: 'gray',
-        fontSize: 16
+        fontSize: 14,
+        opacity: .8
     }
 })
