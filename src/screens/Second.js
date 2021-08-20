@@ -30,7 +30,7 @@ const styles = StyleSheet.create({
     account: {
         transform: [
             {translateX: -85},
-            {translateY: -18}
+            {translateY: -17}
         ],
         color: 'white',
         fontWeight: 'bold'
