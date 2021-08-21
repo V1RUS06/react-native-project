@@ -6,15 +6,17 @@ import {MyButton} from "./MyButton";
 export const Form = ()  => {
     const [username, setUsername] = useState('')
     const [password, setPassword] = useState('')
+    const [isShowKeyboard, setIsShowKeyboard] = useState(false)
 
 
     return (
-        <View style={styles.container}>
+        <View style={{...styles.container, marginBottom: isShowKeyboard ? 20 : 100} }>
             <Text  style={[styles.login, {opacity: 0.5 , marginTop: 30}]}>Логин</Text>
             <TextInput
                 style={styles.input}
                 defaultValue={username}
                 onChangeText={text => setUsername(text)}
+                onFocus={() => setIsShowKeyboard(true)}
             />
             <TextInput
                 style={[styles.input, {marginBottom: 25}] }
@@ -22,6 +24,7 @@ export const Form = ()  => {
                 defaultValue={password}
                 secureTextEntry={true}
                 onChangeText={text => setPassword(text)}
+                onFocus={() => setIsShowKeyboard(true)}
             />
             <MyButton username={username} />
         </View>

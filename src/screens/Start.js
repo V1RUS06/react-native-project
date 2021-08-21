@@ -1,5 +1,5 @@
 import React from "react";
-import {SafeAreaView, StyleSheet} from "react-native";
+import {KeyboardAvoidingView, Platform, SafeAreaView, StyleSheet} from "react-native";
 import {Info} from "../components/Info";
 import {Form} from "../components/Form";
 
@@ -8,7 +8,9 @@ import {Form} from "../components/Form";
 export const Start = () => {
 
     return (
-        <SafeAreaView style={styles.container}>
+        <SafeAreaView
+            style={styles.container}
+        >
             <Info />
             <Form />
         </SafeAreaView>
@@ -16,13 +18,5 @@ export const Start = () => {
 }
 
 const styles = StyleSheet.create({
-    container: {position: 'relative'},
-    icon: {
-        position: 'absolute',
-        transform: [
-            {translateX: 320},
-            {translateY: -37}
-        ],
-        zIndex: 2
-    }
+
 })
