@@ -1,32 +1,64 @@
-import React, {useState} from "react";
-import {StyleSheet, TouchableHighlight, Text, FlatList, TouchableWithoutFeedback} from 'react-native'
+import React, {useEffect, useState} from "react";
+import {StyleSheet, TouchableHighlight, Text, FlatList, TouchableWithoutFeedback, View, ScrollView} from 'react-native'
 import {useNavigation} from "@react-navigation/native";
+import {useDispatch, useSelector} from "react-redux";
+import {LOAD_USER, LOAD_USERS_SUCCESS} from "../redux/reducers/people/action";
+
 
 export const UserList = ({ login }) => {
-    const [listOfItems, setListOfItems] = useState([
-        {text: 'Денис', key: '1'},
-        {text: 'Борис', key: '2'},
-        {text: 'Андрей', key: '3'},
-        {text: 'Виталий', key: '4'}
-    ])
+    const people = useSelector(state => state)
+
+    // const [listOfItems, setListOfItems] = useState(state)
+    //
+    // const items = [];
+    // const Name = listOfItems.arr.map((item) =>  items.push(item['name']))
+    //
+    // console.log('State: ', listOfItems)
+    // console.log('StateARR: ', Name)
 
 
-    const nav = useNavigation()
+    console.log('People: >>',people)
+
+    const nav = useNavigation();
 
     return (
 
 
-        <TouchableHighlight>
-            <FlatList data={listOfItems} renderItem={({item}) => (
-                <TouchableWithoutFeedback onPress={() => {
-                    nav.navigate('Third', {name: item.text, login})
-                }}>
-                    <Text style={styles.text}>{item.text} </Text>
-                </TouchableWithoutFeedback>
-                )}
-            />
+        <ScrollView>
+            {
+                people?.data?.results.map((character, index) => {
+                    return (
+                            <TouchableWithoutFeedback key={index} onPress={() => {
+                                nav.navigate('Third', {
+                                    name: character.name,
+                                    login,
+                                    birth: character.birth_year,
+                                    eyeColor: character.eye_color,
+                                    gender: character.gender,
+                                    height: character.height,
+                                    mass: character.mass
+                                })
+                            }}>
+                                <Text style={styles.text} >{character.name}  </Text>
+                            </TouchableWithoutFeedback>
+                    )
+                }
+            )
+            }
+        </ScrollView>
 
-        </TouchableHighlight>
+
+            // {/*<FlatList data={Name} renderItem={({item}) => (*/}
+            // {/*    <TouchableWithoutFeedback onPress={() => {*/}
+            // {/*        nav.navigate('Third', { Name : name , login})*/}
+            // {/*            // { item.text, login}*/}
+            // {/*    }}>*/}
+            // {/*        <Text style={styles.text}>{item} </Text>*/}
+            // {/*    </TouchableWithoutFeedback>*/}
+            // {/*    )}*/}
+            // {/*/>*/}
+
+        // </TouchableHighlight>
     )
 }
 const styles = StyleSheet.create({

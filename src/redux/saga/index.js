@@ -1,36 +1,85 @@
-import {call, put, fork, takeLatest} from 'redux-saga/effects';
+import {call, put, fork, takeLatest, apply} from 'redux-saga/effects';
+import {LOAD_USER, LOAD_USERS_SUCCESS} from "../reducers/people/action";
+import {delay} from "react-native-reanimated/src/reanimated2/animations";
 
-async function takeData(){
-    const request = await fetch(`http://z.bokus.ru/test.json/`);
+export function* loadPeopleList() {
+    const request = yield call(
+        fetch,
+        `https://swapi.dev/api/people`
+    );
+    const data = yield apply(request, request.json)
 
-    const data = await request.json();
-
-    return data;
+    yield put({
+        type: LOAD_USERS_SUCCESS,
+        payload: data
+    })
 }
-
-export function* loadTitle() {
-    const title = yield call(takeData, 'title');
-
-    yield put({type: 'SET_TITLE', payload: title.title})
-}
-
-export function* loadDescription() {
-    const description = yield call(takeData, 'description');
-
-    yield put({type: 'SET_DESCRIPTION', payload: description.title})
-}
-
 
 // Saga worker
 export function* workerSaga(){
-    yield fork(loadTitle);
+    yield fork(loadPeopleList);
 }
 
 //Saga watcher
 export function* watchLoadDataSaga() {
-    yield takeLatest('CLICK', workerSaga)
+    yield takeLatest(LOAD_USER, workerSaga)
 }
 
 export default function* rootSaga(){
     yield fork(watchLoadDataSaga)
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//========================================
+// async function takeData(){
+//     const request =  await fetch(`https://swapi.dev/api/people`);
+//
+//     const data = await request.json();
+//
+//     return data.results;
+// }
+//
+// export function* loadArr() {
+//     const arr = yield call(takeData);
+//
+//     yield put({type: 'SET_ARR', payload: arr})
+// }
+//
+// // export function* loadDescription() {
+// //     const description = yield call(takeData);
+// //
+// //     yield put({type: 'SET_DESCRIPTION', payload: description.results.films})
+// // }
+//
+//
+// // Saga worker
+// export function* workerSaga(){
+//     yield fork(loadArr);
+// }
+//
+// //Saga watcher
+// export function* watchLoadDataSaga() {
+//     yield takeLatest('CLICK', workerSaga)
+// }
+//
+// export default function* rootSaga(){
+//     yield fork(watchLoadDataSaga)
+// }

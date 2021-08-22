@@ -1,29 +1,36 @@
 import React from "react";
-import {StyleSheet, Text, TouchableHighlight, View} from "react-native";
+import {Dimensions, StyleSheet, Text, TouchableHighlight, View} from "react-native";
 import {ButtonBack} from "./ButtonBack";
 import {useNavigation} from "@react-navigation/native";
 
 export const GrathButton = () => {
 
     const navigation = useNavigation();
+    const height = Dimensions.get('screen').height
 
     return (
-        <View style={styles.dad}>
-            <TouchableHighlight style={styles.footer} onPress={() => navigation.navigate('Start')}>
-                <View style={styles.logOut}>
-                    <Text style={[styles.text, {color: 'white'}]}>Выйти из аккаунта</Text>
-                </View>
-            </TouchableHighlight>
-            <ButtonBack />
+        <View style={[styles.container, {height: height}]}>
+            <View style={styles.dad}>
+                <TouchableHighlight style={styles.footer} onPress={() => navigation.navigate('Start')}>
+                    <View style={styles.logOut}>
+                        <Text style={[styles.text, {color: 'white'}]}>Выйти из аккаунта</Text>
+                    </View>
+                </TouchableHighlight>
+                <ButtonBack />
+            </View>
         </View>
+
     )
 }
 
 const styles = StyleSheet.create({
+    container: {
+        justifyContent: 'flex-end'
+    },
     dad: {
         flexDirection: 'row-reverse',
         justifyContent: 'space-between',
-        marginTop: 180
+        marginBottom: 350
 
     },
     footer: {

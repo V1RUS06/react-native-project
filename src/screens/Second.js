@@ -1,10 +1,14 @@
-import React from "react";
+import React, {useEffect} from "react";
 import {UserList} from "../components/UserList";
 import {SimpleLineIcons} from "@expo/vector-icons";
 import {StyleSheet, Text, View} from "react-native";
+import {LOAD_USERS_SUCCESS} from "../redux/reducers/people/action";
+import {useDispatch} from "react-redux";
 
 export const Second = ({ route  }) => {
     const {login} = route.params
+
+
 
     return (
         <View>

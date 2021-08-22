@@ -4,17 +4,24 @@ import {SimpleLineIcons} from "@expo/vector-icons";
 import {GrathButton} from "../components/GrathButton";
 
 
+
 export const Third = ({ route }) => {
+   const {birth, eyeColor, gender, height, mass} = route.params
 
     return (
         <View style={styles.container}>
             <SimpleLineIcons style={styles.icon} name="user" size={20} color="white" />
             <Text style={styles.account}>{route.params.login}</Text>
 
+
             <View style={styles.containerSecond}>
                 <View style={styles.mainInfo}>
                     <Text style={styles.header}>{route.params.name}</Text>
-                    <Text style={styles.text}>"По поручению губернатора Московской области А.Ю Воробьёва, мы увеличили темпы работ по благоустройству дворов, - сообщил Евгений Хромушин. На этот год запланировано благоустройство 1440 дворовых территорий, работы уже выполнено на 1310 объектах, что состовляет 91% программы этого года. В 45 муниципалитетах программа благоустройства выполнена на 100%, в трех муниципалитетах на 100 и более процентво, благоустройство остальных дворов находится в разной степени готовности от 75% до 95% и будет завершено в установленные сроки"</Text>
+                    <Text style={styles.text}>Рост: {height}</Text>
+                    <Text style={styles.text}>Год: рождения{birth}</Text>
+                    <Text style={styles.text}>Цвет глаз: {eyeColor}</Text>
+                    <Text style={styles.text}>Пол: {gender}</Text>
+                    <Text style={styles.text}>Вес: {mass}</Text>
                 </View>
             </View>
 

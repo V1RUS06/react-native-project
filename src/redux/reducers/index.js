@@ -1,27 +1,29 @@
-const initial = {
+import {LOAD_USERS_SUCCESS} from "./people/action";
 
+const initialPeopleState = {
+    loading : false,
+    data: null
 }
 
-export default function reducer(state = initial, action ){
+export default function reducer(state = initialPeopleState, action ){
     switch (action.type) {
-        case 'SET_TITLE': {
+        case LOAD_USERS_SUCCESS: {
             return {
                 ...state,
-                title: [
-                    ...state.title,
-                    ...action.payload
-                ]
+                loading: true,
+                data: action.payload
             }
         }
-        case 'SET_DESCRIPTION': {
-            return {
-                ...state,
-                description: [
-                    ...state.description,
-                    ...action.payload
-                ]
-            }
-        }
+
+        // case 'SET_DESCRIPTION': {
+        //     return {
+        //         ...state,
+        //         description: [
+        //             ...state.description,
+        //             ...action.payload
+        //         ]
+        //     }
+        // }
         default:
             return state
     }
